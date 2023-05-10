@@ -5,20 +5,7 @@ public class Contas {
   int numeroConta;
   String nomeCompleto;
   String tipoConta;
-  Long saldo = 2000L;
-
-  public void showSaldo() {
-    System.out.println("Saldo : R$" + saldo);
-  }
-
-  public void receberValor(Long valor) {
-    setSaldo(this.saldo + valor);
-  }
-
-  public void transferirValor(Long valor, Contas conta) {
-    setSaldo(this.saldo - valor);
-    conta.receberValor(valor);
-  }
+  double saldo;
 
   public String getNomeCompleto() {
     return this.nomeCompleto;
@@ -36,12 +23,12 @@ public class Contas {
     this.tipoConta = tipoConta;
   }
 
-  public Long getSaldo() {
+  public double getSaldo() {
     return this.saldo;
   }
 
-  public void setSaldo(Long saldoInicial) {
-    this.saldo = saldoInicial;
+  public void setSaldo(double saldo) {
+    this.saldo = saldo;
   }
 
   public void setNome(String nome) {

@@ -1,18 +1,21 @@
 package aplicacao;
 
-import java.sql.SQLException;
-import java.util.Scanner;
-
 import contas.Contas;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.Random;
+import java.util.Scanner;
 import repository.ContasDAO;
 
 public class App {
 
-  public static void main(String[] args) throws SQLException{
+  public static void main(String[] args) throws SQLException {
     Scanner input = new Scanner(System.in);
     ContasDAO dao = new ContasDAO();
+    DecimalFormat df = new DecimalFormat("00000");
+    Random r = new Random();
     int opcao = 0;
-    int i = 0;
+
     System.out.println("Operações");
 
     while (opcao != 4) {
@@ -41,15 +44,42 @@ public class App {
             default:
               System.out.println("Selecao Invalida");
           }
-          System.out.println("Informe o saldo da conta: ");
-          conta.setSaldo(input.nextLong());
-          conta.setNumeroConta(i+=1);
-          dao.insert(conta);
+
+          int idAux;
+          idAux = r.nextInt(1, 9999);
+
+          conta.setNumeroConta(Integer.parseInt(df.format(idAux)));
+          dao.insertConta(conta);
           break;
+        case 1:
+          System.out.println("Informe o numero da conta: ");
+          int aux = input.nextInt();
+          System.out.println("\tCONTA " + aux);
+          System.out.println("Saldo corrente: R$" + dao.showSaldo(aux));
+          System.out.println("Pressione qualquer tecla para continuar");
+          input.nextLine();
+          input.nextLine();
+
+          break;
+        case 2:
+          System.out.println("Informe o numero da conta: ");
+          int numeroConta = input.nextInt();
+          System.out.println("Informe o valor a ser depositado: ");
+          double valor = input.nextDouble();
+          dao.deposita(numeroConta, valor);
+          break;
+        case 3:
+        System.out.println("Informe o numero da conta: ");
+        numeroConta = input.nextInt();
+        System.out.println("Informe o valor da transferencia: ");
+        valor = input.nextDouble();
+        dao.transfere(numeroConta, valor);
+        break;
+
+
         default:
       }
     }
     input.close();
   }
-  
 }
