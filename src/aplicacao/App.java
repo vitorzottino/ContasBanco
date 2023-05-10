@@ -45,16 +45,13 @@ public class App {
               System.out.println("Selecao Invalida");
           }
 
-          int idAux;
-          idAux = r.nextInt(1, 9999);
-
-          conta.setNumeroConta(Integer.parseInt(df.format(idAux)));
+          conta.setNumeroConta(r.nextInt(1, 9999));
           dao.insertConta(conta);
           break;
         case 1:
           System.out.println("Informe o numero da conta: ");
           int aux = input.nextInt();
-          System.out.println("\tCONTA " + aux);
+          System.out.println("\tCONTA " + df.format(aux));
           System.out.println("Saldo corrente: R$" + dao.showSaldo(aux));
           System.out.println("Pressione qualquer tecla para continuar");
           input.nextLine();
@@ -69,14 +66,12 @@ public class App {
           dao.deposita(numeroConta, valor);
           break;
         case 3:
-        System.out.println("Informe o numero da conta: ");
-        numeroConta = input.nextInt();
-        System.out.println("Informe o valor da transferencia: ");
-        valor = input.nextDouble();
-        dao.transfere(numeroConta, valor);
-        break;
-
-
+          System.out.println("Informe o numero da conta: ");
+          numeroConta = input.nextInt();
+          System.out.println("Informe o valor da transferencia: ");
+          valor = input.nextDouble();
+          dao.transfere(numeroConta, valor);
+          break;
         default:
       }
     }
